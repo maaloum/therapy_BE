@@ -40,7 +40,7 @@ Make sure your code is pushed to GitHub/GitLab/Bitbucket.
    - **Root Directory**: `backend`
    - **Runtime**: `Node`
    - **Build Command**: `npm install && npx prisma generate --schema=./prisma/schema.prisma`
-   - **Start Command**: `npm start`
+   - **Start Command**: `node api/server.js` (or `npm start` if package.json start script is correct)
    - **Plan**: Free tier available (upgrades available)
 
    **Environment Variables:**
