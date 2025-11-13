@@ -37,13 +37,40 @@ dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);
+// Socket.io CORS configuration - support Vercel deployments
+const socketOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",").map((url) => url.trim())
+  : [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://therapy-n8zh1gyv8-maaloums-projects.vercel.app",
+    ];
+
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests with no origin
+      if (!origin) return callback(null, true);
+
+      // Check if origin is in allowed list
+      const isAllowed = socketOrigins.some((allowedOrigin) => {
+        return (
+          origin === allowedOrigin ||
+          origin.match(/^https:\/\/therapy-.*\.vercel\.app$/)
+        );
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true,
   },
   transports: ["websocket", "polling"],
+  allowEIO3: true, // Allow Engine.IO v3 clients
 });
 
 // Initialize i18next
@@ -74,9 +101,38 @@ app.use("/uploads", express.static("uploads"));
 // Middleware
 app.use(helmet());
 app.use(morgan("dev"));
+// CORS configuration - support multiple origins
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",").map((url) => url.trim())
+  : [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://therapy-n8zh1gyv8-maaloums-projects.vercel.app",
+      /^https:\/\/therapy-.*\.vercel\.app$/, // Allow all Vercel preview deployments
+    ];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Check if origin matches allowed origins
+      const isAllowed = allowedOrigins.some((allowedOrigin) => {
+        if (typeof allowedOrigin === "string") {
+          return origin === allowedOrigin;
+        } else if (allowedOrigin instanceof RegExp) {
+          return allowedOrigin.test(origin);
+        }
+        return false;
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
