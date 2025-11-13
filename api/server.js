@@ -1,12 +1,14 @@
 import express from "express";
-import serverless from "serverless-http";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import i18next from "i18next";
 import Backend from "i18next-fs-backend";
 import middleware from "i18next-http-middleware";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -25,16 +27,24 @@ import translationRoutes from "../routes/translation.routes.js";
 import reviewRoutes from "../routes/review.routes.js";
 import sessionNoteRoutes from "../routes/sessionNote.routes.js";
 
+// Import socket handler
+import { initializeSocket } from "../socket/socketHandler.js";
+
 // Import error handler
 import { errorHandler } from "../middleware/errorHandler.js";
 
 dotenv.config();
 
 const app = express();
-
-// Note: Socket.io is disabled for Vercel deployment
-// Socket.io requires persistent connections which don't work with serverless functions
-// For real-time features, consider using a separate service or Vercel's Edge Functions
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+  transports: ["websocket", "polling"],
+});
 
 // Initialize i18next
 i18next
@@ -52,16 +62,14 @@ i18next
     },
   });
 
-// Note: File uploads on Vercel should use external storage (S3, Vercel Blob, etc.)
-// The /tmp directory is available but is ephemeral and cleared between function invocations
-// For production, configure multer to use cloud storage
-// For local development, uncomment the following if needed:
-// import fs from "fs";
-// const uploadsDir = "./uploads";
-// if (!fs.existsSync(uploadsDir)) {
-//   fs.mkdirSync(uploadsDir, { recursive: true });
-// }
-// app.use("/uploads", express.static("uploads"));
+// Create uploads directory if it doesn't exist
+const uploadsDir = "./uploads";
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Serve static files from uploads directory
+app.use("/uploads", express.static("uploads"));
 
 // Middleware
 app.use(helmet());
@@ -76,9 +84,8 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(middleware.handle(i18next));
 
-// Socket.io initialization disabled for Vercel
-// Uncomment if deploying to a platform that supports persistent connections
-// initializeSocket(io);
+// Initialize Socket.io
+initializeSocket(io);
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -107,14 +114,11 @@ app.get("/api/health", (req, res) => {
 // Error handler
 app.use(errorHandler);
 
-// Export handler for Vercel
-export const handler = serverless(app);
+const PORT = process.env.PORT || 5000;
 
-// For local development, start server normally
-if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
-  });
-}
+httpServer.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+});
+
+export { io };
