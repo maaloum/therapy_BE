@@ -1,4 +1,5 @@
 import express from "express";
+import serverless from "serverless-http";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -109,11 +110,4 @@ app.get("/api/health", (req, res) => {
 // Error handler
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-
-httpServer.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
-});
-
-export { io };
+export const handler = serverless(app);
