@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "no_token": "المصادقة مطلوبة",
+    "user_not_found": "المستخدم غير موجود",
+    "invalid_token": "رمز غير صالح",
+    "token_expired": "انتهت صلاحية الرمز",
+    "unauthorized": "غير مصرح",
+    "forbidden": "الوصول محظور",
+    "user_exists": "المستخدم موجود بالفعل",
+    "register_success": "تم التسجيل بنجاح",
+    "invalid_credentials": "بيانات اعتماد غير صحيحة",
+    "login_success": "تم تسجيل الدخول بنجاح",
+    "language_updated": "تم تحديث تفضيل اللغة"
+  },
+  "validation": {
+    "error": "خطأ في التحقق",
+    "invalid_language": "لغة غير صالحة"
+  },
+  "doctor": {
+    "not_found": "الطبيب غير موجود",
+    "profile_updated": "تم تحديث الملف الشخصي بنجاح",
+    "profile_not_found": "الملف الشخصي غير موجود"
+  },
+  "booking": {
+    "doctor_not_found": "الطبيب غير موجود أو غير موثق",
+    "client_profile_not_found": "ملف العميل غير موجود",
+    "created": "تم إنشاء الحجز بنجاح",
+    "not_found": "الحجز غير موجود",
+    "unauthorized": "غير مصرح",
+    "invalid_status": "حالة غير صالحة",
+    "status_updated": "تم تحديث حالة الحجز",
+    "cannot_reschedule": "لا يمكن إعادة جدولة هذا الحجز",
+    "rescheduled": "تم إعادة جدولة الحجز بنجاح",
+    "booking_not_confirmed": "يجب تأكيد الحجز قبل الدفع"
+  },
+  "message": {
+    "missing_fields": "الحقول المطلوبة مفقودة",
+    "sent": "تم إرسال الرسالة",
+    "marked_read": "تم تمييز الرسائل كمقروءة"
+  },
+  "payment": {
+    "booking_not_found": "الحجز غير موجود",
+    "booking_not_confirmed": "يجب تأكيد الحجز قبل الدفع",
+    "unauthorized": "غير مصرح"
+  },
+  "user": {
+    "profile_updated": "تم تحديث الملف الشخصي بنجاح"
+  },
+  "admin": {
+    "user_verified": "تم تحديث التحقق من المستخدم"
+  },
+  "translation": {
+    "created": "تم إنشاء/تحديث الترجمة"
+  },
+  "review": {
+    "booking_not_found": "الحجز غير موجود",
+    "session_not_completed": "يجب إكمال الجلسة قبل التقييم",
+    "already_exists": "يوجد تقييم بالفعل لهذا الحجز",
+    "created": "تم إنشاء التقييم بنجاح"
+  },
+  "sessionNote": {
+    "booking_not_found": "الحجز غير موجود",
+    "unauthorized": "غير مصرح",
+    "updated": "تم تحديث ملاحظة الجلسة"
+  },
+  "error": {
+    "server_error": "خطأ في الخادم"
+  }
+}
+

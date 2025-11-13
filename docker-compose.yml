@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: therapy_user
+      POSTGRES_PASSWORD: therapy_password
+      POSTGRES_DB: therapy_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://therapy_user:therapy_password@postgres:5432/therapy_platform?schema=public
+      JWT_SECRET: your-super-secret-jwt-key
+      PORT: 5000
+      FRONTEND_URL: http://localhost:5173
+    depends_on:
+      - postgres
+    volumes:
+      - ./uploads:/app/uploads
+
+volumes:
+  postgres_data:
+

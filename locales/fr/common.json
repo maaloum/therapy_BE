@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "no_token": "Authentification requise",
+    "user_not_found": "Utilisateur non trouvé",
+    "invalid_token": "Token invalide",
+    "token_expired": "Token expiré",
+    "unauthorized": "Non autorisé",
+    "forbidden": "Accès interdit",
+    "user_exists": "L'utilisateur existe déjà",
+    "register_success": "Inscription réussie",
+    "invalid_credentials": "Identifiants invalides",
+    "login_success": "Connexion réussie",
+    "language_updated": "Préférence de langue mise à jour"
+  },
+  "validation": {
+    "error": "Erreur de validation",
+    "invalid_language": "Langue invalide"
+  },
+  "doctor": {
+    "not_found": "Médecin non trouvé",
+    "profile_updated": "Profil mis à jour avec succès",
+    "profile_not_found": "Profil non trouvé"
+  },
+  "booking": {
+    "doctor_not_found": "Médecin non trouvé ou non vérifié",
+    "client_profile_not_found": "Profil client non trouvé",
+    "created": "Réservation créée avec succès",
+    "not_found": "Réservation non trouvée",
+    "unauthorized": "Non autorisé",
+    "invalid_status": "Statut invalide",
+    "status_updated": "Statut de la réservation mis à jour",
+    "cannot_reschedule": "Impossible de reprogrammer cette réservation",
+    "rescheduled": "Réservation reprogrammée avec succès",
+    "booking_not_confirmed": "La réservation doit être confirmée avant le paiement"
+  },
+  "message": {
+    "missing_fields": "Champs requis manquants",
+    "sent": "Message envoyé",
+    "marked_read": "Messages marqués comme lus"
+  },
+  "payment": {
+    "booking_not_found": "Réservation non trouvée",
+    "booking_not_confirmed": "La réservation doit être confirmée avant le paiement",
+    "unauthorized": "Non autorisé"
+  },
+  "user": {
+    "profile_updated": "Profil mis à jour avec succès"
+  },
+  "admin": {
+    "user_verified": "Vérification de l'utilisateur mise à jour"
+  },
+  "translation": {
+    "created": "Traduction créée/mise à jour"
+  },
+  "review": {
+    "booking_not_found": "Réservation non trouvée",
+    "session_not_completed": "La session doit être terminée avant de pouvoir être évaluée",
+    "already_exists": "Un avis existe déjà pour cette réservation",
+    "created": "Avis créé avec succès"
+  },
+  "sessionNote": {
+    "booking_not_found": "Réservation non trouvée",
+    "unauthorized": "Non autorisé",
+    "updated": "Note de session mise à jour"
+  },
+  "error": {
+    "server_error": "Erreur du serveur"
+  }
+}
+
