@@ -10,19 +10,19 @@ import middleware from "i18next-http-middleware";
 import fs from "fs";
 
 // Import routes
-import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/user.routes.js";
-import doctorRoutes from "./routes/doctor.routes.js";
-import bookingRoutes from "./routes/booking.routes.js";
-import messageRoutes from "./routes/message.routes.js";
-import paymentRoutes from "./routes/payment.routes.js";
-import adminRoutes from "./routes/admin.routes.js";
-import translationRoutes from "./routes/translation.routes.js";
-import reviewRoutes from "./routes/review.routes.js";
-import sessionNoteRoutes from "./routes/sessionNote.routes.js";
+import authRoutes from "../routes/auth.routes.js";
+import userRoutes from "../routes/user.routes.js";
+import doctorRoutes from "../routes/doctor.routes.js";
+import bookingRoutes from "../routes/booking.routes.js";
+import messageRoutes from "../routes/message.routes.js";
+import paymentRoutes from "../routes/payment.routes.js";
+import adminRoutes from "../routes/admin.routes.js";
+import translationRoutes from "../routes/translation.routes.js";
+import reviewRoutes from "../routes/review.routes.js";
+import sessionNoteRoutes from "../routes/sessionNote.routes.js";
 
 // Import error handler
-import { errorHandler } from "./middleware/errorHandler.js";
+import { errorHandler } from "../middleware/errorHandler.js";
 
 dotenv.config();
 
