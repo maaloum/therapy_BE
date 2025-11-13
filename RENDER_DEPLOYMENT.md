@@ -39,7 +39,7 @@ Make sure your code is pushed to GitHub/GitLab/Bitbucket.
    - **Branch**: `main` (or your default branch)
    - **Root Directory**: `backend`
    - **Runtime**: `Node`
-   - **Build Command**: `npm install && npm run build`
+   - **Build Command**: `npm install && npx prisma generate`
    - **Start Command**: `npm start`
    - **Plan**: Free tier available (upgrades available)
 

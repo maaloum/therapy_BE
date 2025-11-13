@@ -3,7 +3,7 @@ services:
     name: therapy-platform-backend
     env: node
     plan: starter
-    buildCommand: npm install && npm run build
+    buildCommand: npm install && npx prisma generate
     startCommand: npm start
     envVars:
       - key: NODE_ENV
