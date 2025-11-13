@@ -7,12 +7,12 @@
   "scripts": {
     "dev": "nodemon api/server.js",
     "start": "node api/server.js",
-    "build": "prisma generate",
-    "prisma:generate": "prisma generate",
+    "build": "prisma generate --schema=./prisma/schema.prisma",
+    "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:seed": "node prisma/seed.js",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --schema=./prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
